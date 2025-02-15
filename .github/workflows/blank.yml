@@ -18,12 +18,12 @@ jobs:
     - name: Setting Up the Ubuntu Environment
     #  if: ${{ failure() }}
       run: bash linux-ssh.sh
-      env:
-        LINUX_USER_PASSWORD: ${{ secrets.LINUX_USER_PASSWORD }}
+    steps:
+    - name: Start SSH session
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-        CHROME_HEADLESS_CODE: ${{ secrets.CHROME_HEADLESS_CODE }}
-        LINUX_MACHINE_NAME: ${{ secrets.LINUX_MACHINE_NAME }}
-        LINUX_USERNAME: ${{ secrets.LINUX_USERNAME }}
+        SSH_PASS: ${{ secrets.SSH_PASS }}
     - name: Keep Running Ubuntu System and keepAlive
      # if: ${{ failure() }}
       run: sleep 6h
